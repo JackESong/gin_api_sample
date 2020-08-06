@@ -4,6 +4,9 @@
     go build main.go
      go run main.go
 
+代码 来自
+https://www.bookstack.cn/books/eddycjy-go 学习版
+
 
 ### 打包
 在windows下编译成Linux下可执行的二进制文件并且执行(cmd下)
