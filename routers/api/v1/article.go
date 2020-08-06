@@ -1,4 +1,5 @@
 package v1
+
 import (
 	"github.com/astaxie/beego/validation"
 	"github.com/gin-gonic/gin"
@@ -182,6 +183,7 @@ func DeleteArticle(c *gin.Context) {
 	} else {
 		for _, err := range valid.Errors {
 			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
+			//logging.Info(err.Key, err.Message)
 		}
 	}
 	c.JSON(http.StatusOK, gin.H{
