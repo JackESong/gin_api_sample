@@ -1,10 +1,10 @@
-package models
+package model
 import (
 	"log"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"sample_api/pkg/setting"
+	"sample_api/framework/setting"
 )
 var db *gorm.DB
 type Model struct {

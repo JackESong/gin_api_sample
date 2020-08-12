@@ -1,8 +1,8 @@
 
 ### 实验
 
-    go build main.go
-     go run main.go
+go build main.go
+go run main.go
 
 代码 来自
 https://www.bookstack.cn/books/eddycjy-go 学习版

@@ -1,6 +1,6 @@
 package util
 import (
-	"sample_api/pkg/setting"
+	"sample_api/framework/setting"
 	"time"
 	jwt "github.com/dgrijalva/jwt-go"
 )

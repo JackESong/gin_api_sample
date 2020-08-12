@@ -1,23 +1,27 @@
-package routers
+package controller
+
 import (
 	"github.com/gin-gonic/gin"
-	"sample_api/middleware"
-	"sample_api/pkg/setting"
-	"sample_api/routers/api"
-	"sample_api/routers/api/v1"
+	"sample_api/framework/logger"
+	"sample_api/framework/setting"
+	"sample_api/framework/auth"
+	"sample_api/project/controller/api"
+	"sample_api/project/controller/api/v1"
 )
 
 
 func InitRouter() *gin.Engine {
 	r := gin.New()
-	r.Use(gin.Logger())
-	r.Use(gin.Recovery())
+	//r.Use(gin.Logger())
+	//r.Use(gin.Recovery())
+	r.Use(logger.GinLogger(logger.Logger), logger.GinRecovery(logger.Logger, true))
 	gin.SetMode(setting.RunMode)
+
 
 	r.GET("/auth", api.GetAuth)
 
 	apiv1 := r.Group("/api/v1")
-	apiv1.Use(jwt.JWT())
+	apiv1.Use(auth.JWT())
 	{
 		//获取标签列表
 		apiv1.GET("/tags", v1.GetTags)

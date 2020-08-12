@@ -1,4 +1,4 @@
-package models
+package model
 type Auth struct {
 	ID int `gorm:"primary_key" json:"id"`
 	Username string `json:"username"`
