@@ -4,18 +4,25 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"sample_api/framework/conf"
 	"sample_api/framework/logger"
 	"sample_api/framework/setting"
 	"sample_api/project/controller"
+	"sample_api/project/entity"
+	"time"
 )
+
+
+func init() {
+	fmt.Println("启动初始化方法")
+}
+
+
 func main() {
-	// load config from conf/conf.json
+	fmt.Println("当前时间:" + time.Now().String())
 	if len(os.Args) < 1 {
 		return
 	}
-	// init logger
-	cfg := &conf.LogConfig{
+	cfg := &entity.LogConfig{
 		Filename:   "catalina.out",
 		MaxSize:    50,
 		MaxBackups: 50,

@@ -10,15 +10,15 @@ import (
 	"net/http/httputil"
 	"os"
 	"runtime/debug"
+	"sample_api/project/entity"
 	"strings"
 	"time"
-	"sample_api/framework/conf"
 )
 
 var Logger *zap.Logger
 
 // InitLogger 初始化Logger
-func InitLogger(cfg *conf.LogConfig) (err error) {
+func InitLogger(cfg *entity.LogConfig) (err error) {
 	writeSyncer := getLogWriter(cfg.Filename, cfg.MaxSize, cfg.MaxBackups, cfg.MaxAge)
 	encoder := getEncoder()
 	var l = new(zapcore.Level)

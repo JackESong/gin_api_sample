@@ -1,4 +1,4 @@
-package conf
+package entity
 
 type LogConfig struct {
 	Level string `json:"level"`

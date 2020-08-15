@@ -7,7 +7,6 @@ import (
 	"sample_api/common"
 	"sample_api/project/model"
 	"sample_api/framework/setting"
-	"sample_api/common/util"
 )
 //获取多个文章标签
 func GetTags(c *gin.Context) {
@@ -23,7 +22,7 @@ func GetTags(c *gin.Context) {
 		maps["state"] = state
 	}
 	code := common.SUCCESS
-	data["lists"] = model.GetTags(util.GetPage(c), setting.PageSize, maps)
+	data["lists"] = model.GetTags(common.GetPage(c), setting.PageSize, maps)
 	data["total"] = model.GetTagTotal(maps)
 	c.JSON(http.StatusOK, gin.H{
 		"code" : code,
