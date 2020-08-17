@@ -8,6 +8,7 @@ import (
 	"sample_api/framework/setting"
 	"sample_api/project/controller"
 	"sample_api/project/entity"
+	"sample_api/project/model"
 	"time"
 )
 
@@ -19,6 +20,9 @@ func init() {
 
 func main() {
 	fmt.Println("当前时间:" + time.Now().String())
+	setting.Setup()
+	model.Setup()
+
 	if len(os.Args) < 1 {
 		return
 	}
@@ -35,10 +39,10 @@ func main() {
 	}
 	router := controller.InitRouter()
 	s := &http.Server{
-		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
+		Addr:           fmt.Sprintf(":%d", setting.ServerSetting.HttpPort),
 		Handler:        router,
-		ReadTimeout:    setting.ReadTimeout,
-		WriteTimeout:   setting.WriteTimeout,
+		ReadTimeout:    setting.ServerSetting.ReadTimeout,
+		WriteTimeout:   setting.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
 	s.ListenAndServe()

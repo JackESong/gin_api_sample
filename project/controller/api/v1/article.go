@@ -55,7 +55,7 @@ func GetArticles(c *gin.Context) {
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
 		code = common.SUCCESS
-		data["lists"] = model.GetArticles(common.GetPage(c), setting.PageSize, maps)
+		data["lists"] = model.GetArticles(common.GetPage(c), setting.AppSetting.PageSize, maps)
 		data["total"] = model.GetArticleTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
