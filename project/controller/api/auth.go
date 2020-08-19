@@ -5,9 +5,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"sample_api/common"
-	"sample_api/framework/auth"
-	"sample_api/project/model"
+	"gin_api_sample/common"
+	"gin_api_sample/framework/auth"
+	"gin_api_sample/project/dao"
 )
 type user struct {
 	Username string `valid:"Required; MaxSize(50)"`
@@ -22,7 +22,7 @@ func GetAuth(c *gin.Context) {
 	data := make(map[string]interface{})
 	code := common.INVALID_PARAMS
 	if ok {
-		isExist := model.CheckAuth(username, password)
+		isExist := dao.CheckAuth(username, password)
 		if isExist {
 			token, err := auth.GenerateToken(username, password)
 			if err != nil {

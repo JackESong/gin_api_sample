@@ -1,18 +1,14 @@
-package model
+package dao
 import (
 	"log"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"sample_api/framework/setting"
+	"gin_api_sample/framework/setting"
 )
 var db *gorm.DB
 
-type Model struct {
-	ID int `gorm:"primary_key" json:"id"`
-	CreatedOn int `json:"created_on"`
-	ModifiedOn int `json:"modified_on"`
-}
+
 func Setup() {
 	var (
 		err error

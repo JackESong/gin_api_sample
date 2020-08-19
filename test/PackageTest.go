@@ -3,7 +3,7 @@ package main // import "golang"
 // 导入其他地方的包，包通过 go mod 机制寻找
 import (
 	"fmt"
-	"sample_api/test/diy"
+	"gin_api_sample/test/diy"
 )
 // init函数在main函数之前执行
 func init() {

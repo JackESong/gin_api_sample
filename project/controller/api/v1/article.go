@@ -6,9 +6,9 @@ import (
 	"github.com/unknwon/com"
 	"log"
 	"net/http"
-	"sample_api/common"
-	"sample_api/project/model"
-	"sample_api/framework/setting"
+	"gin_api_sample/common"
+	"gin_api_sample/project/dao"
+	"gin_api_sample/framework/setting"
 )
 //获取单个文章
 func GetArticle(c *gin.Context) {
@@ -18,8 +18,8 @@ func GetArticle(c *gin.Context) {
 	code := common.INVALID_PARAMS
 	var data interface {}
 	if ! valid.HasErrors() {
-		if model.ExistArticleByID(id) {
-			data = model.GetArticle(id)
+		if dao.ExistArticleByID(id) {
+			data = dao.GetArticle(id)
 			code = common.SUCCESS
 		} else {
 			code = common.ERROR_NOT_EXIST_ARTICLE
@@ -55,8 +55,8 @@ func GetArticles(c *gin.Context) {
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
 		code = common.SUCCESS
-		data["lists"] = model.GetArticles(common.GetPage(c), setting.AppSetting.PageSize, maps)
-		data["total"] = model.GetArticleTotal(maps)
+		data["lists"] = dao.GetArticles(common.GetPage(c), setting.AppSetting.PageSize, maps)
+		data["total"] = dao.GetArticleTotal(maps)
 	} else {
 		for _, err := range valid.Errors {
 			log.Printf("err.key: %s, err.message: %s", err.Key, err.Message)
@@ -85,7 +85,7 @@ func AddArticle(c *gin.Context) {
 	valid.Range(state, 0, 1, "state").Message("状态只允许0或1")
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
-		if model.ExistTagByID(tagId) {
+		if dao.ExistTagByID(tagId) {
 			data := make(map[string]interface {})
 			data["tag_id"] = tagId
 			data["title"] = title
@@ -93,7 +93,7 @@ func AddArticle(c *gin.Context) {
 			data["content"] = content
 			data["created_by"] = createdBy
 			data["state"] = state
-			model.AddArticle(data)
+			dao.AddArticle(data)
 			code = common.SUCCESS
 		} else {
 			code = common.ERROR_NOT_EXIST_TAG
@@ -131,8 +131,8 @@ func EditArticle(c *gin.Context) {
 	valid.MaxSize(modifiedBy, 100, "modified_by").Message("修改人最长为100字符")
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
-		if model.ExistArticleByID(id) {
-			if model.ExistTagByID(tagId) {
+		if dao.ExistArticleByID(id) {
+			if dao.ExistTagByID(tagId) {
 				data := make(map[string]interface {})
 				if tagId > 0 {
 					data["tag_id"] = tagId
@@ -147,7 +147,7 @@ func EditArticle(c *gin.Context) {
 					data["content"] = content
 				}
 				data["modified_by"] = modifiedBy
-				model.EditArticle(id, data)
+				dao.EditArticle(id, data)
 				code = common.SUCCESS
 			} else {
 				code = common.ERROR_NOT_EXIST_TAG
@@ -173,8 +173,8 @@ func DeleteArticle(c *gin.Context) {
 	valid.Min(id, 1, "id").Message("ID必须大于0")
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
-		if model.ExistArticleByID(id) {
-			model.DeleteArticle(id)
+		if dao.ExistArticleByID(id) {
+			dao.DeleteArticle(id)
 			code = common.SUCCESS
 		} else {
 			code = common.ERROR_NOT_EXIST_ARTICLE

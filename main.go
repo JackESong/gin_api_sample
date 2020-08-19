@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"sample_api/framework/logger"
-	"sample_api/framework/setting"
-	"sample_api/project/controller"
-	"sample_api/project/entity"
-	"sample_api/project/model"
+	"gin_api_sample/framework/logger"
+	"gin_api_sample/framework/setting"
+	"gin_api_sample/project/controller"
+	"gin_api_sample/project/entity"
+	"gin_api_sample/project/dao"
 	"time"
 )
 
@@ -21,7 +21,7 @@ func init() {
 func main() {
 	fmt.Println("当前时间:" + time.Now().String())
 	setting.Setup()
-	model.Setup()
+	dao.Setup()
 
 	if len(os.Args) < 1 {
 		return

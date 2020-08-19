@@ -1,8 +1,8 @@
 package auth
 import (
 	"github.com/dgrijalva/jwt-go"
-	"sample_api/common"
-	"sample_api/framework/setting"
+	"gin_api_sample/common"
+	"gin_api_sample/framework/setting"
 	"time"
 	"net/http"
 	"github.com/gin-gonic/gin"

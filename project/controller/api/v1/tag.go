@@ -4,9 +4,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
 	"net/http"
-	"sample_api/common"
-	"sample_api/project/model"
-	"sample_api/framework/setting"
+	"gin_api_sample/common"
+	"gin_api_sample/project/dao"
+	"gin_api_sample/framework/setting"
 )
 //获取多个文章标签
 func GetTags(c *gin.Context) {
@@ -22,8 +22,8 @@ func GetTags(c *gin.Context) {
 		maps["state"] = state
 	}
 	code := common.SUCCESS
-	data["lists"] = model.GetTags(common.GetPage(c), setting.AppSetting.PageSize, maps)
-	data["total"] = model.GetTagTotal(maps)
+	data["lists"] = dao.GetTags(common.GetPage(c), setting.AppSetting.PageSize, maps)
+	data["total"] = dao.GetTagTotal(maps)
 	c.JSON(http.StatusOK, gin.H{
 		"code" : code,
 		"msg" : common.GetMsg(code),
@@ -44,9 +44,9 @@ func AddTag(c *gin.Context) {
 
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
-		if ! model.ExistTagByName(name) {
+		if ! dao.ExistTagByName(name) {
 			code = common.SUCCESS
-			model.AddTag(name, state, createdBy)
+			dao.AddTag(name, state, createdBy)
 		} else {
 			code = common.ERROR_EXIST_TAG
 		}
@@ -75,7 +75,7 @@ func EditTag(c *gin.Context) {
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
 		code = common.SUCCESS
-		if model.ExistTagByID(id) {
+		if dao.ExistTagByID(id) {
 			data := make(map[string]interface{})
 			data["modified_by"] = modifiedBy
 			if name != "" {
@@ -84,7 +84,7 @@ func EditTag(c *gin.Context) {
 			if state != -1 {
 				data["state"] = state
 			}
-			model.EditTag(id, data)
+			dao.EditTag(id, data)
 		} else {
 			code = common.ERROR_NOT_EXIST_TAG
 		}
@@ -103,8 +103,8 @@ func DeleteTag(c *gin.Context) {
 	code := common.INVALID_PARAMS
 	if ! valid.HasErrors() {
 		code = common.SUCCESS
-		if model.ExistTagByID(id) {
-			model.DeleteTag(id)
+		if dao.ExistTagByID(id) {
+			dao.DeleteTag(id)
 		} else {
 			code = common.ERROR_NOT_EXIST_TAG
 		}

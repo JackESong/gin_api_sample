@@ -2,7 +2,7 @@ package common
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/unknwon/com"
-	"sample_api/framework/setting"
+	"gin_api_sample/framework/setting"
 )
 func GetPage(c *gin.Context) int {
 	result := 0

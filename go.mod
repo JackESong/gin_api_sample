@@ -1,4 +1,4 @@
-module sample_api
+module gin_api_sample
 
 go 1.13
 

@@ -2,11 +2,11 @@ package controller
 
 import (
 	"github.com/gin-gonic/gin"
-	"sample_api/framework/logger"
-	"sample_api/framework/setting"
-	"sample_api/framework/auth"
-	"sample_api/project/controller/api"
-	"sample_api/project/controller/api/v1"
+	"gin_api_sample/framework/logger"
+	"gin_api_sample/framework/setting"
+	"gin_api_sample/framework/auth"
+	"gin_api_sample/project/controller/api"
+	"gin_api_sample/project/controller/api/v1"
 )
 
 

@@ -10,7 +10,7 @@ import (
 	"net/http/httputil"
 	"os"
 	"runtime/debug"
-	"sample_api/project/entity"
+	"gin_api_sample/project/entity"
 	"strings"
 	"time"
 )
